@@ -1,0 +1,49 @@
+# projetoapp
+
+A new Flutter project.
+
+## Getting Started
+
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
+
+
+*************************************************************************************************************************
+## Login com Facebook - gerar assinatura: 
+297430792374416
+Projeto App
+
+flutter pub add flutter_facebook_auth
+
+
+No Windows:
+1 - no prompt de comando como administrador ir em: C:\Arquivos de Programas\Android\Android Studio\jre\bin
+2 - executar: keytool -exportcert -alias androiddebugkey -keystore C:\Users\Renato\.android\debug.keystore | C:\openssl\bin\openssl sha1 -binary | C:\openssl\bin\openssl base64
+
+Concluir a configuração no ios - Mac
+https://www.youtube.com/watch?v=O1L4gwakcxo => em 5 minutos
+
+*************************************************************************************************************************
+
+https://www.youtube.com/watch?v=Q00Foa8CiDk
+
+https://pub.dev/packages/google_sign_in/install
+
+https://www.youtube.com/watch?v=1k-gITZA9CI
+
+flutter pub add google_sign_in
+
+Retorno do Google ao logar com sucesso:
+displayName: Renato Alves Pereira
+email: renatorv@gmail.com
+photoUrl: https://lh3.googleusercontent.com/a/AATXAJwixhWgzlBPELrXHg01d62pfYqPF-13VdSxEiG7=s1337
+
+*************************************************************************************************************************

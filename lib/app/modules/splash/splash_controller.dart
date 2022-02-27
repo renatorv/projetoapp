@@ -18,7 +18,8 @@ class SplashController extends GetxController {
 
   Future<void> checkLogin() async {
     final sp = await SharedPreferences.getInstance();
-    // await 2.seconds.delay();
+    // Controla o tempo do splash
+    await 4.seconds.delay();
     if (sp.containsKey('user')) {
       /// Vai para home
       _logged(UserLogged.authententicate);

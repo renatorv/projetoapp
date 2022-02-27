@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:projetoapp/app/core/insta_state.dart';
 import './home_controller.dart';
 
@@ -22,7 +23,7 @@ class _HomePageState extends InstaState<HomePage, HomeController> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-            child: Text(controller.name),
+            child: Obx(() => Text(controller.name.toString())),
           ),
           Center(
             child: TextButton(

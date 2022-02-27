@@ -1,17 +1,17 @@
 import 'package:get/get.dart';
 import 'package:projetoapp/app/models/user_model.dart';
-import 'package:projetoapp/app/modules/splash/splash_page.dart';
+import 'package:projetoapp/app/modules/login/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController extends GetxController {
-  String _name = '';
+  final _name = ''.obs;
   @override
   void onInit() {
     super.onInit();
     pegaDadosLogin();
   }
 
-  String get name => _name;
+  RxString get name => _name;
 
   Future<void> pegaDadosLogin() async {
     final sp = await SharedPreferences.getInstance();
@@ -19,7 +19,7 @@ class HomeController extends GetxController {
     final usu = sp.getString('user');
 
     final _user = UserModel.fromJson(usu!);
-    _name = _user.name;
+    _name.value = _user.name;
 
     update();
   }
@@ -29,6 +29,6 @@ class HomeController extends GetxController {
 
     sp.clear();
 
-    Get.offAllNamed(SplashPage.ROUTE_PAGE);
+    Get.offAllNamed(LoginPage.ROUTE_PAGE);
   }
 }

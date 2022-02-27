@@ -15,7 +15,7 @@ class InstapetAppbar extends AppBar {
               fontFamily: 'IndieFlower',
               letterSpacing: 2.5,
               fontWeight: FontWeight.bold,
-              fontSize: 62,
+              fontSize: 60,
             ),
           ),
           iconTheme: const IconThemeData(color: Colors.black),

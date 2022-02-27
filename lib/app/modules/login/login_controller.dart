@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:projetoapp/app/core/mixins/mixins.dart';
 import 'package:projetoapp/app/core/rest_client.dart';
@@ -41,7 +39,6 @@ class LoginController extends GetxController with LoaderMixin, MessageMixin {
         ),
       );
     } catch (e) {
-      log(e.toString());
       _loading.toggle();
       _message(
         MessageModel(

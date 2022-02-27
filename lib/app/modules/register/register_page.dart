@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:projetoapp/app/components/instapet_appbar.dart';
 import 'package:projetoapp/app/components/instapet_buttom.dart';
 import 'package:projetoapp/app/components/instapet_textformfield.dart';
-import 'package:projetoapp/app/core/insta_state.dart';
+import 'package:projetoapp/app/core/core.dart';
 import 'package:validatorless/validatorless.dart';
 import './register_controller.dart';
 
@@ -22,13 +22,18 @@ class _RegisterPageState extends InstaState<RegisterPage, RegisterController> {
   final _passwordEC = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final Responsive _responsive = Responsive(context);
     return Scaffold(
       appBar: InstapetAppbar(elevation: 0),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: IntrinsicHeight(
           child: Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.only(
+              top: _responsive.dp(3.6),
+              right: _responsive.dp(3.6),
+              left: _responsive.dp(3.6),
+            ),
             child: Form(
               key: _formKey,
               child: Column(
@@ -44,7 +49,7 @@ class _RegisterPageState extends InstaState<RegisterPage, RegisterController> {
                     'Preencha os campos abaixo para criar o seu cadastro.',
                     style: context.textTheme.bodyText1,
                   ),
-                  const SizedBox(height: 30),
+                  SizedBox(height: _responsive.dp(3.8)),
                   InstapetTextformfield(
                     label: 'Nome',
                     controller: _nameEC,
@@ -56,7 +61,7 @@ class _RegisterPageState extends InstaState<RegisterPage, RegisterController> {
                       ),
                     ]),
                   ),
-                  const SizedBox(height: 30),
+                  SizedBox(height: _responsive.dp(3.8)),
                   InstapetTextformfield(
                     label: 'E-mail',
                     controller: _emailEC,
@@ -67,7 +72,7 @@ class _RegisterPageState extends InstaState<RegisterPage, RegisterController> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  SizedBox(height: _responsive.dp(3.8)),
                   InstapetTextformfield(
                     label: 'Senha',
                     controller: _passwordEC,
@@ -82,7 +87,7 @@ class _RegisterPageState extends InstaState<RegisterPage, RegisterController> {
                     ),
                     obscureText: true,
                   ),
-                  const SizedBox(height: 30),
+                  SizedBox(height: _responsive.dp(3.8)),
                   InstapetTextformfield(
                     label: 'Confirma senha',
                     obscureText: true,
@@ -100,7 +105,7 @@ class _RegisterPageState extends InstaState<RegisterPage, RegisterController> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 50),
+                  SizedBox(height: _responsive.dp(5)),
                   Center(
                     child: InstapetButtom(
                       label: 'CADASTRAR',

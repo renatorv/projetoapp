@@ -4,6 +4,8 @@ import 'package:projetoapp/app/components/instapet_appbar.dart';
 import 'package:projetoapp/app/components/instapet_buttom.dart';
 import 'package:projetoapp/app/components/instapet_textformfield.dart';
 import 'package:projetoapp/app/core/insta_state.dart';
+import 'package:projetoapp/app/core/ui_config.dart';
+import 'package:projetoapp/app/modules/register/register.dart';
 import 'package:validatorless/validatorless.dart';
 import './login_controller.dart';
 
@@ -99,6 +101,21 @@ class _LoginPageState extends InstaState<LoginPage, LoginController> {
                           ),
                         ),
                         const SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Não possui uma conta?',
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Get.toNamed(RegisterPage.ROUTE_PAGE);
+                              },
+                              child:
+                                  Text('Cadastre-se', style: UiConfig.textBold),
+                            ),
+                          ],
+                        ),
                         const Center(
                           child: Text(
                             '- Ou acesse com sua rede social -',

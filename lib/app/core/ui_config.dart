@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:projetoapp/app/modules/home/home.dart';
 import 'package:projetoapp/app/modules/login/login.dart';
+import 'package:projetoapp/app/modules/register/register.dart';
 import 'package:projetoapp/app/modules/splash/splash.dart';
 
 class UiConfig {
@@ -42,6 +43,11 @@ class UiConfig {
       name: HomePage.ROUTE_PAGE,
       page: () => HomePage(),
       binding: HomeBindings(),
+    ),
+    GetPage(
+      name: RegisterPage.ROUTE_PAGE,
+      page: () => RegisterPage(),
+      binding: RegisterBindings(),
     )
   ];
 }

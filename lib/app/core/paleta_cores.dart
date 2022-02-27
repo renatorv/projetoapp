@@ -4,6 +4,7 @@ class PaletaCores {
   static const Color azulFacebook =
       Color(0xFF1777F2); // testar #1877f2 azul facebook
   static const Color scaffold = Color(0xFFF0F2F5);
+  static const Color principal = Color(0xFFF5591F);
   static const LinearGradient degradeEstoria = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,

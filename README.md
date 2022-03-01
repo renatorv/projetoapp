@@ -33,11 +33,7 @@ https://www.youtube.com/watch?v=O1L4gwakcxo => em 5 minutos
 
 *************************************************************************************************************************
 
-https://www.youtube.com/watch?v=Q00Foa8CiDk
-
-https://pub.dev/packages/google_sign_in/install
-
-https://www.youtube.com/watch?v=1k-gITZA9CI
+https://www.youtube.com/watch?v=xuvBFjNOl5M&t=17s
 
 flutter pub add google_sign_in
 

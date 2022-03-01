@@ -121,7 +121,7 @@ class _LoginPageState extends InstaState<LoginPage, LoginController> {
                             FloatingActionButton.extended(
                               heroTag: "btnGoogle",
                               onPressed: () {
-                                // controller.loginGoogle();
+                                controller.googleLogin();
                               },
                               icon: Image.asset(
                                 'assets/images/google_icon.png',

@@ -32,7 +32,7 @@ Concluir a configuração no ios - Mac
 https://www.youtube.com/watch?v=O1L4gwakcxo => em 5 minutos
 
 *************************************************************************************************************************
-
+GOOGLE
 https://www.youtube.com/watch?v=xuvBFjNOl5M&t=17s
 
 flutter pub add google_sign_in
@@ -41,5 +41,8 @@ Retorno do Google ao logar com sucesso:
 displayName: Renato Alves Pereira
 email: renatorv@gmail.com
 photoUrl: https://lh3.googleusercontent.com/a/AATXAJwixhWgzlBPELrXHg01d62pfYqPF-13VdSxEiG7=s1337
+
+FACEBOOK
+https://www.youtube.com/watch?v=O1L4gwakcxo
 
 *************************************************************************************************************************

@@ -1,3 +1,4 @@
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:projetoapp/app/core/mixins/mixins.dart';
 import 'package:projetoapp/app/core/rest_client.dart';
@@ -20,6 +21,9 @@ class LoginController extends GetxController with LoaderMixin, MessageMixin {
   final googleSignIn = GoogleSignIn();
   GoogleSignInAccount? _user;
 
+  //Facebook
+  Map? _userDataFacebook;
+
   @override
   void onInit() {
     super.onInit();
@@ -28,6 +32,32 @@ class LoginController extends GetxController with LoaderMixin, MessageMixin {
   }
 
   GoogleSignInAccount get user => _user!;
+  Map? get loginFace => _userDataFacebook;
+
+  Future loginFacebook() async {
+    final LoginResult result = await FacebookAuth.instance.login();
+
+    if (result.status == LoginStatus.success) {
+      // you are logged
+      final AccessToken accessToken = result.accessToken!;
+
+      print(accessToken.applicationId);
+
+      final requestData = await FacebookAuth.i.getUserData(
+        fields: "email, name, picture",
+      );
+
+      print(requestData);
+      print(requestData['picture']);
+    } else {
+      print(result.status);
+      print(result.message);
+    }
+  }
+
+  Future logoutFacebook() async {
+    await FacebookAuth.i.logOut();
+  }
 
   Future googleLogin() async {
     try {

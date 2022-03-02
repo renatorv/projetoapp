@@ -140,7 +140,7 @@ class _LoginPageState extends InstaState<LoginPage, LoginController> {
                             FloatingActionButton.extended(
                               heroTag: "btnFacebook",
                               onPressed: () {
-                                // controller.loginFacebook();
+                                controller.loginFacebook();
                               },
                               icon: Image.asset(
                                 'assets/images/facebook_icon.png',

@@ -35,7 +35,8 @@ class LoginController extends GetxController with LoaderMixin, MessageMixin {
   Map? get loginFace => _userDataFacebook;
 
   Future loginFacebook() async {
-    final LoginResult result = await FacebookAuth.instance.login();
+    final LoginResult result = await FacebookAuth.instance
+        .login(permissions: ["public_profile", "email"]);
 
     if (result.status == LoginStatus.success) {
       // you are logged
@@ -57,6 +58,8 @@ class LoginController extends GetxController with LoaderMixin, MessageMixin {
 
   Future logoutFacebook() async {
     await FacebookAuth.i.logOut();
+
+    Get.offAllNamed(LoginPage.ROUTE_PAGE);
   }
 
   Future googleLogin() async {

@@ -4,6 +4,8 @@ import 'package:projetoapp/app/modules/home/home.dart';
 import 'package:projetoapp/app/modules/login/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../register_pet/register_pet_page.dart';
+
 class SplashController extends GetxController {
   final _logged = UserLogged.empty.obs;
 
@@ -29,10 +31,19 @@ class SplashController extends GetxController {
     }
   }
 
-  void checkIsLogged(UserLogged userLogged) {
+  void checkIsLogged(UserLogged userLogged) async {
+    final sp = await SharedPreferences.getInstance();
     switch (userLogged) {
       case UserLogged.authententicate:
-        Get.offAllNamed(HomePage.ROUTE_PAGE);
+
+        /// Se tiver a chave 'pet' já configurada, significa que o usuário
+        /// já cadastrou o pet, caso contrário é necessário realizar o cadastro
+        if (sp.containsKey('pet')) {
+          Get.offAllNamed(HomePage.ROUTE_PAGE);
+        } else {
+          Get.offAllNamed(RegisterPetPage.ROUTE_PAGE);
+        }
+
         break;
       case UserLogged.unauthenticate:
         Get.offAllNamed(LoginPage.ROUTE_PAGE);

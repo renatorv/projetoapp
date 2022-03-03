@@ -5,6 +5,8 @@ import 'package:projetoapp/app/modules/login/login.dart';
 import 'package:projetoapp/app/modules/register/register.dart';
 import 'package:projetoapp/app/modules/splash/splash.dart';
 
+import '../modules/register_pet/register_pet.dart';
+
 class UiConfig {
   UiConfig._();
   static final appTheme = ThemeData(
@@ -48,6 +50,11 @@ class UiConfig {
       name: RegisterPage.ROUTE_PAGE,
       page: () => RegisterPage(),
       binding: RegisterBindings(),
-    )
+    ),
+    GetPage(
+      name: RegisterPetPage.ROUTE_PAGE,
+      page: () => RegisterPetPage(),
+      binding: RegisterPetBindings(),
+    ),
   ];
 }

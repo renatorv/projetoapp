@@ -39,7 +39,7 @@ class LoginController extends GetxController with LoaderMixin, MessageMixin {
         .login(permissions: ["public_profile", "email"]);
 
     if (result.status == LoginStatus.success) {
-      // you are logged
+      // ESTÁ LOGADO
       final AccessToken accessToken = result.accessToken!;
 
       print(accessToken.applicationId);

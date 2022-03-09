@@ -1,41 +1,48 @@
-import 'package:get/get.dart';
-import 'package:projetoapp/app/models/pet_model.dart';
-import 'package:projetoapp/app/repositories/pet_repository.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:get/get.dart';
+// import 'package:projetoapp/app/models/pet_model.dart';
+// import 'package:projetoapp/app/repositories/pet_repository.dart';
 
-// import '../../models/user_model.dart';
+// class RegisterPetController extends GetxController {
+//   final PetRepository _repository;
+//   RegisterPetController(this._repository);
+//   // final _name = ''.obs;
+//   List<Pet> _pets = [];
+//   @override
+//   void onInit() async {
+//     super.onInit();
+//     PetModel petModel = await _repository.listPets();
+
+//     _pets = petModel.result;
+
+//     ///
+//     // print(pets.result.length);
+
+//     for (var p in petModel.result) {
+//       print(p.name);
+//     }
+//   }
+
+//   List<Pet> get listPets => _pets;
+// }
+
+import 'package:get/get.dart';
+import '../../models/animal_model.dart';
 
 class RegisterPetController extends GetxController {
-  final PetRepository _repository;
-  RegisterPetController(this._repository);
-  // final _name = ''.obs;
+  List<Animal> _animal = [];
   @override
   void onInit() async {
     super.onInit();
-    // pegaDadosLogin();
-    PetModel pets = await _repository.listPets();
 
-    ///
-    print(pets.result.length);
+    AnimalModel _animalModel = Get.arguments;
 
-    for (var p in pets.result) {
+    _animal = _animalModel.result;
+
+    for (var p in _animalModel.result) {
       print(p.name);
     }
+    update();
   }
 
-  // RxString get name => _name;
-
-  // Future<void> pegaDadosLogin() async {
-  //   final sp = await SharedPreferences.getInstance();
-
-  //   final usu = sp.getString('user');
-
-  //   final _user = UserModel.fromJson(usu!);
-
-  //   List<String> _completeName = _user.name.split(' ');
-
-  //   _name.value = _completeName[0];
-
-  //   update();
-  // }
+  List<Animal> get listAnimals => _animal;
 }

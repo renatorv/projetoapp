@@ -4,8 +4,9 @@ import 'package:validatorless/validatorless.dart';
 import '../../components/instapet_appbar.dart';
 import '../../components/instapet_textformfield.dart';
 import '../../core/core.dart';
-import '../../core/insta_state.dart';
+import '../../models/animal_model.dart';
 import './register_pet_controller.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 
 class RegisterPetPage extends StatefulWidget {
   static const String ROUTE_PAGE = '/register-pet';
@@ -19,6 +20,9 @@ class _RegisterPetPageState
     extends InstaState<RegisterPetPage, RegisterPetController> {
   final _formKey = GlobalKey<FormState>();
   final _nameEC = TextEditingController();
+
+  String? selectedValue;
+
   @override
   Widget build(BuildContext context) {
     final Responsive _responsive = Responsive(context);
@@ -61,6 +65,58 @@ class _RegisterPetPageState
                     ]),
                   ),
                   SizedBox(height: _responsive.dp(3.8)),
+                  DropdownButtonFormField2<Animal>(
+                    decoration: InputDecoration(
+                      isDense: true,
+                      contentPadding: EdgeInsets.zero,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                    ),
+                    isExpanded: true,
+                    hint: Text(
+                      'Selecione a espécie.',
+                      style: TextStyle(fontSize: _responsive.dp(2.2)),
+                    ),
+                    icon: const Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black45,
+                    ),
+                    iconSize: _responsive.dp(4.2),
+                    buttonHeight: _responsive.dp(8),
+                    buttonPadding: EdgeInsets.only(
+                        left: _responsive.dp(2), right: _responsive.dp(2)),
+                    dropdownDecoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    items: controller.listAnimals
+                        .map(
+                          (item) => DropdownMenuItem<Animal>(
+                            value: item,
+                            child: Text(
+                              item.name,
+                              style: TextStyle(
+                                fontSize: _responsive.dp(2.2),
+                              ),
+                            ),
+                          ),
+                        )
+                        .toList(),
+                    validator: (value) {
+                      if (value == null) {
+                        return 'Favor selecionar espécie.';
+                      }
+                      return null;
+                    },
+                    onChanged: (value) {
+                      var pet = value as Animal;
+                      print(pet.name);
+                      print(pet.objectId);
+                    },
+                    onSaved: (value) {
+                      selectedValue = value.toString();
+                    },
+                  )
                 ],
               ),
             ),
@@ -68,25 +124,5 @@ class _RegisterPetPageState
         ),
       ),
     );
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     centerTitle: true,
-    //     title: const Text(
-    //       'Registro de seu Pet',
-    //       style: TextStyle(
-    //         color: Colors.white,
-    //         fontWeight: FontWeight.bold,
-    //       ),
-    //     ),
-    //   ),
-    //   body: Column(
-    //     mainAxisAlignment: MainAxisAlignment.start,
-    //     crossAxisAlignment: CrossAxisAlignment.start,
-    //     children: [
-    //       Obx(() => Text(
-    //           'Olá ${controller.name.toString()}, chegou a hora de cadastrarmos seu amiguinho!')),
-    //     ],
-    //   ),
-    // );
   }
 }

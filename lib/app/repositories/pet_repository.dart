@@ -1,13 +1,13 @@
 import '../core/core.dart';
-import '../models/pet_model.dart';
+import '../models/animal_model.dart';
 
 class PetRepository {
   final RestClient _restClient;
   PetRepository(this._restClient);
 
-  Future<PetModel> listPets() async {
-    final response = await _restClient.post('/list-pets', {}, decoder: (resp) {
-      return PetModel.fromMap(resp);
+  Future<AnimalModel> listPets() async {
+    final response = await _restClient.post('/lista-pets', {}, decoder: (resp) {
+      return AnimalModel.fromMap(resp);
     });
 
     if (response.hasError) {

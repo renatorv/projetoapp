@@ -35,25 +35,52 @@ class LoginController extends GetxController with LoaderMixin, MessageMixin {
   Map? get loginFace => _userDataFacebook;
 
   Future loginFacebook() async {
-    final LoginResult result = await FacebookAuth.instance
-        .login(permissions: ["public_profile", "email"]);
+    String? _name, _email, _photo = '';
+    try {
+      final LoginResult result = await FacebookAuth.instance
+          .login(permissions: ["public_profile", "email"]);
 
-    if (result.status == LoginStatus.success) {
-      // ESTÁ LOGADO
-      final AccessToken accessToken = result.accessToken!;
+      if (result.status == LoginStatus.success) {
+        // ESTÁ LOGADO
+        final AccessToken accessToken = result.accessToken!;
 
-      print(accessToken.applicationId);
+        print(accessToken.applicationId);
 
-      final requestData = await FacebookAuth.i.getUserData(
-        fields: "email, name, picture",
+        final requestData = await FacebookAuth.i.getUserData(
+          fields: "email, name, picture",
+        );
+
+        _name = requestData['name'];
+        _email = requestData['email'];
+        _photo = requestData['picture']['data']['url'];
+
+        final inputModel = SocialNetInpuModel(
+          name: _name ?? "",
+          email: _email ?? "",
+          photoUrl: _photo ?? "",
+        );
+
+        acessoGoogle(inputModel);
+      } else {
+        _message(
+          MessageModel(
+            title: 'Erro',
+            message: 'Favor confirmar usuário e senha.',
+            type: MessageType.error,
+          ),
+        );
+      }
+    } catch (e) {
+      print(e.toString());
+      _message(
+        MessageModel(
+          title: 'Erro',
+          message: 'Não foi possível realizar login com Facebook.',
+          type: MessageType.error,
+        ),
       );
-
-      print(requestData);
-      print(requestData['picture']);
-    } else {
-      print(result.status);
-      print(result.message);
     }
+    update();
   }
 
   Future logoutFacebook() async {
@@ -79,7 +106,13 @@ class LoginController extends GetxController with LoaderMixin, MessageMixin {
 
       await FirebaseAuth.instance.signInWithCredential(credential);
 
-      acessoGoogle(_user!);
+      final inputModel = SocialNetInpuModel(
+        name: _user?.displayName ?? "",
+        email: _user?.email ?? "",
+        photoUrl: _user?.photoUrl ?? "",
+      );
+
+      acessoGoogle(inputModel);
     } on Exception catch (e) {
       print(e.toString());
     }
@@ -98,26 +131,20 @@ class LoginController extends GetxController with LoaderMixin, MessageMixin {
   // Verificar se o usuário que esta acessando com Google já possui cadastro na
   // na base da aplicação, caso não tenha realizar o cadastro.
   //***************************************************************************/
-  void acessoGoogle(GoogleSignInAccount _user) async {
-    final inputModel = SocialNetInpuModel(
-      name: _user.displayName ?? "",
-      email: _user.email,
-      photoUrl: _user.photoUrl ?? "",
-    );
-
+  void acessoGoogle(SocialNetInpuModel inputModel) async {
     try {
       _loading.toggle();
       _message(null);
-      final _user = await _repository.acessoGoogle(inputModel);
+      final _resp = await _repository.acessoRedeSocial(inputModel);
 
       ///
       /// id == 0, significa que o login está sendo pelo Google e o usuário
       /// já possui cadastro na base do App
-      if (_user.id == '0') {
-        login(_user.email, '123456');
+      if (_resp.id == '0') {
+        login(_resp.email, '123456');
       } else {
         final sp = await SharedPreferences.getInstance();
-        await sp.setString('user', _user.toJson());
+        await sp.setString('user', _resp.toJson());
 
         _loading.toggle();
         Get.offAllNamed(SplashPage.ROUTE_PAGE);
@@ -136,7 +163,7 @@ class LoginController extends GetxController with LoaderMixin, MessageMixin {
       _message(
         MessageModel(
           title: 'Erro',
-          message: 'Erro ao registrar usuário (Google).',
+          message: 'Erro ao registrar usuário com rede social.',
           type: MessageType.error,
         ),
       );

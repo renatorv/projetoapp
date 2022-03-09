@@ -93,7 +93,7 @@ class UserRepository {
     return response.body!;
   }
 
-  Future<UserModel> acessoGoogle(SocialNetInpuModel model) async {
+  Future<UserModel> acessoRedeSocial(SocialNetInpuModel model) async {
     int code = 0;
     final response = await _restClient.post('/sign-up-google', {
       'name': model.name,
@@ -126,7 +126,7 @@ class UserRepository {
     }
 
     if (response.hasError) {
-      String message = 'Erro ao cadastrar usuário (Google)..';
+      String message = 'Erro ao cadastrar usuário através de Rede Social.';
 
       throw RestClientException(message);
     }

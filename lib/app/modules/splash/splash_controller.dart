@@ -4,14 +4,25 @@ import 'package:projetoapp/app/modules/home/home.dart';
 import 'package:projetoapp/app/modules/login/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../core/mixins/mixins.dart';
+import '../../models/animal_model.dart';
+import '../../repositories/pet_repository.dart';
 import '../register_pet/register_pet_page.dart';
 
-class SplashController extends GetxController {
+class SplashController extends GetxController with LoaderMixin, MessageMixin {
+  final PetRepository _repository;
   final _logged = UserLogged.empty.obs;
+
+  SplashController(this._repository);
+
+  final _loading = false.obs;
+  final _message = Rxn<MessageModel>();
 
   @override
   void onInit() {
     super.onInit();
+    loaderListener(_loading);
+    messageListener(_message);
     ever<UserLogged>(_logged, checkIsLogged);
     checkLogin();
   }
@@ -41,7 +52,25 @@ class SplashController extends GetxController {
         if (sp.containsKey('pet')) {
           Get.offAllNamed(HomePage.ROUTE_PAGE);
         } else {
-          Get.offAllNamed(RegisterPetPage.ROUTE_PAGE);
+          try {
+            _loading.toggle();
+            _message(null);
+
+            AnimalModel animalModel = await _repository.listPets();
+
+            Get.offAllNamed(RegisterPetPage.ROUTE_PAGE, arguments: animalModel);
+
+            _loading.toggle();
+          } catch (e) {
+            _loading.toggle();
+            _message(
+              MessageModel(
+                title: 'Erro',
+                message: 'Erro ao validar dados.',
+                type: MessageType.error,
+              ),
+            );
+          }
         }
 
         break;

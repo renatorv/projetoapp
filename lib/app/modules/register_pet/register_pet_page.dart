@@ -259,8 +259,8 @@ class _RegisterPetPageState
                           validator: Validatorless.multiple([
                             Validatorless.required('Nome é obrigatório.'),
                             Validatorless.min(
-                              6,
-                              'Nome deve conter pelo menos 6 caracteres.',
+                              4,
+                              'Nome deve conter pelo menos 4 caracteres.',
                             ),
                           ]),
                         ),
@@ -270,7 +270,14 @@ class _RegisterPetPageState
                           children: [
                             IconButton(
                               icon: const Icon(Icons.arrow_forward),
-                              onPressed: () {},
+                              onPressed: () {
+                                final formValid =
+                                    _formKey.currentState?.validate() ?? false;
+
+                                if (formValid) {
+                                  print(_nameEC.text);
+                                }
+                              },
                             ),
                           ],
                         ),

@@ -47,3 +47,5 @@ class MyApp extends StatelessWidget {
 // Or run on an iOS simulator without code signing
 // ════════════════════════════════════════════════════════════════════════════════
 // No development certificates available to code sign app for device deployment
+
+//https://www.codewithflutter.com/how-to-change-app-name-in-flutter-android-ios/

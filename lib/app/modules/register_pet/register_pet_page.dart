@@ -6,6 +6,7 @@ import '../../components/instapet_textformfield.dart';
 import '../../core/core.dart';
 import '../../models/animal_model.dart';
 import '../../models/raca_model.dart';
+import '../photo_pet/photo_pet_page.dart';
 import './register_pet_controller.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
@@ -22,9 +23,7 @@ class _RegisterPetPageState
   final _formKey = GlobalKey<FormState>();
   final _nameEC = TextEditingController();
 
-  String? selectedValue;
-
-  // late Raca? racaAtual;?????
+  String? selectedValue, racaId, especieId;
 
   final GlobalKey<FormFieldState> key = GlobalKey<FormFieldState>();
 
@@ -38,7 +37,8 @@ class _RegisterPetPageState
             final formValid = _formKey.currentState?.validate() ?? false;
 
             if (formValid) {
-              print(_nameEC.text);
+              Get.toNamed(PhotoPetPage.ROUTE_PAGE,
+                  arguments: [_nameEC.text, especieId, racaId]);
             }
           },
           child: Icon(Icons.arrow_forward),
@@ -134,8 +134,7 @@ class _RegisterPetPageState
                             key.currentState?.reset();
 
                             var pet = value as Animal;
-                            // print(pet.name);
-                            // print(pet.objectId);
+                            especieId = pet.objectId;
                             controller.buscaRacasPet(pet.objectId);
                           },
                           onSaved: (value) {
@@ -193,31 +192,13 @@ class _RegisterPetPageState
                           },
                           onChanged: (Raca? value) {
                             setState(() {});
-                            // racaAtual = value;??????
-                            // var raca = value as Raca;
-                            // print(raca.name);
+                            var raca = value as Raca;
+                            racaId = raca.idRaca;
                           },
                           onSaved: (value) {
                             selectedValue = value.toString();
                           },
                         ),
-                        // SizedBox(height: _responsive.dp(30)),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.end,
-                        //   children: [
-                        //     IconButton(
-                        //       icon: const Icon(Icons.arrow_forward),
-                        //       onPressed: () {
-                        //         final formValid =
-                        //             _formKey.currentState?.validate() ?? false;
-
-                        //         if (formValid) {
-                        //           print(_nameEC.text);
-                        //         }
-                        //       },
-                        //     ),
-                        //   ],
-                        // ),
                       ],
                     ),
                   ),

@@ -64,5 +64,11 @@
 	<false/>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Este aplicativo requer acesso à biblioteca de fotos.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Este aplicativo não requer acesso ao microfone.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Este aplicativo requer acesso à câmera.</string>
 </dict>
 </plist>

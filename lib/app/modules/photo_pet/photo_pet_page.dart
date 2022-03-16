@@ -56,9 +56,12 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
                     child: SizedBox(
                       width: 160,
                       height: 160,
-                      child: Icon(
-                        Icons.image,
-                      ),
+                      child:
+                          Image.asset('assets/images/cropped-akps_header.png'),
+                      // child: Icon(
+                      //   Icons.image,
+                      //   size: 60,
+                      // ),
                     ),
                   ),
             // FlutterLogo(size: 160),

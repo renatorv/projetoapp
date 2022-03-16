@@ -1,9 +1,9 @@
 import 'dart:io';
-
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../components/instapet_appbar.dart';
+import '../../components/instapet_buttom.dart';
 import '../../core/core.dart';
 import './photo_pet_controller.dart';
 
@@ -37,61 +37,150 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
     return Scaffold(
       appBar: InstapetAppbar(elevation: 0),
       backgroundColor: Colors.white,
-      body: Container(
-        padding: EdgeInsets.all(32),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // SizedBox(height: _responsive.dp(2)),
-            Spacer(),
-            image != null
-                ? ClipOval(
-                    child: Image.file(
-                      image!,
-                      width: 100,
-                      height: 120,
-                    ),
-                  )
-                : ClipOval(
-                    child: SizedBox(
-                      width: 160,
-                      height: 160,
-                      child:
-                          Image.asset('assets/images/cropped-akps_header.png'),
-                      // child: Icon(
-                      //   Icons.image,
-                      //   size: 60,
-                      // ),
-                    ),
+      body: SingleChildScrollView(
+        child: IntrinsicHeight(
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: _responsive.dp(3.6),
+              right: _responsive.dp(3.6),
+              left: _responsive.dp(3.6),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Insira uma foto de seu amiguinho.',
+                  style: context.textTheme.headline6?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFFF5591F),
                   ),
-            // FlutterLogo(size: 160),
-            SizedBox(height: _responsive.dp(2)),
-            Center(
-              child: Text(
-                'Insira uma foto de seu amiguinho.',
-                style: context.textTheme.headline6?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: context.theme.primaryColorDark,
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
-              ),
+                SizedBox(height: _responsive.dp(3.8)),
+                image != null
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(300),
+                        child: Image.file(
+                          image!,
+                          width: 200,
+                          height: 200,
+                        ),
+                      )
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(300),
+                        child: Image.asset(
+                          'assets/images/cropped-akps_header.png',
+                          width: 200,
+                          height: 200,
+                        ),
+                      ),
+                SizedBox(height: _responsive.dp(10)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Ink(
+                      decoration: const ShapeDecoration(
+                        color: Color(0xFFF5591F),
+                        shape: CircleBorder(),
+                      ),
+                      child: IconButton(
+                        iconSize: 48,
+                        color: Colors.white,
+                        onPressed: () => pickImage(ImageSource.camera),
+                        icon: Icon(Icons.camera_alt_outlined),
+                      ),
+                    ),
+                    Ink(
+                      decoration: const ShapeDecoration(
+                        color: Color(0xFFF5591F),
+                        shape: CircleBorder(),
+                      ),
+                      child: IconButton(
+                        iconSize: 48,
+                        color: Colors.white,
+                        onPressed: () => pickImage(ImageSource.gallery),
+                        icon: Icon(Icons.file_copy_outlined),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: _responsive.dp(8)),
+                InstapetButtom(
+                  label: 'CADASTRAR',
+                  onPressed: () {},
+                  width: context.width,
+                )
+                // buidButton(
+                //   title: 'Galeria',
+                //   icon: Icons.file_copy_outlined,
+                //   onClicked: () => pickImage(ImageSource.gallery),
+                // ),
+                // SizedBox(height: _responsive.dp(3.8)),
+                // buidButton(
+                //   title: 'Camera',
+                //   icon: Icons.camera_alt_outlined,
+                //   onClicked: () => pickImage(ImageSource.camera),
+                // ),
+              ],
             ),
-            SizedBox(height: _responsive.dp(3.8)),
-            buidButton(
-              title: 'Galeria',
-              icon: Icons.camera_alt_outlined,
-              onClicked: () => pickImage(ImageSource.gallery),
-            ),
-            SizedBox(height: _responsive.dp(3.8)),
-            buidButton(
-              title: 'Camera',
-              icon: Icons.camera_alt_outlined,
-              onClicked: () => pickImage(ImageSource.camera),
-            ),
-            Spacer(),
-          ],
+          ),
         ),
       ),
+      // body: Container(
+      //   padding: EdgeInsets.all(32),
+      //   child: Column(
+      //     crossAxisAlignment: CrossAxisAlignment.center,
+      //     children: [
+      //       // SizedBox(height: _responsive.dp(2)),
+      //       Spacer(),
+      //       image != null
+      //           ? ClipOval(
+      //               child: Image.file(
+      //                 image!,
+      //                 width: 100,
+      //                 height: 120,
+      //               ),
+      //             )
+      //           : ClipOval(
+      //               child: SizedBox(
+      //                 width: 160,
+      //                 height: 160,
+      //                 child:
+      //                     Image.asset('assets/images/cropped-akps_header.png'),
+      //                 // child: Icon(
+      //                 //   Icons.image,
+      //                 //   size: 60,
+      //                 // ),
+      //               ),
+      //             ),
+      //       // FlutterLogo(size: 160),
+      //       SizedBox(height: _responsive.dp(2)),
+      //       Center(
+      //         child: Text(
+      //           'Insira uma foto de seu amiguinho.',
+      //           style: context.textTheme.headline6?.copyWith(
+      //             fontWeight: FontWeight.bold,
+      //             color: context.theme.primaryColorDark,
+      //           ),
+      //           textAlign: TextAlign.center,
+      //         ),
+      //       ),
+      //       SizedBox(height: _responsive.dp(3.8)),
+      //       buidButton(
+      //         title: 'Galeria',
+      //         icon: Icons.camera_alt_outlined,
+      //         onClicked: () => pickImage(ImageSource.gallery),
+      //       ),
+      //       SizedBox(height: _responsive.dp(3.8)),
+      //       buidButton(
+      //         title: 'Camera',
+      //         icon: Icons.camera_alt_outlined,
+      //         onClicked: () => pickImage(ImageSource.camera),
+      //       ),
+      //       Spacer(),
+      //     ],
+      //   ),
+      // ),
     );
   }
 }
@@ -106,8 +195,8 @@ Widget buidButton({
     ElevatedButton(
       style: ElevatedButton.styleFrom(
         minimumSize: Size.fromHeight(56),
-        primary: Colors.white,
-        onPrimary: Colors.black,
+        // primary: Colors.white,
+        // onPrimary: Colors.black,
         textStyle: TextStyle(fontSize: 20),
       ),
       onPressed: onClicked,

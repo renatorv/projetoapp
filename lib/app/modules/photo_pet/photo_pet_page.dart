@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:progress_stepper/progress_stepper.dart';
+import 'package:projetoapp/app/modules/photo_pet/widgets/flecha.dart';
 import '../../components/instapet_appbar.dart';
 import '../../components/instapet_buttom.dart';
 import '../../core/core.dart';
@@ -49,6 +49,16 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Row(
+                  children: [
+                    Flecha(title: 'Cão'),
+                    SizedBox(width: _responsive.dp(.8)),
+                    Flecha(title: 'Biagle'),
+                    SizedBox(width: _responsive.dp(.8)),
+                    Flecha(title: 'Belinha'),
+                  ],
+                ),
+                SizedBox(height: _responsive.dp(2)),
                 Text(
                   'Insira uma foto de seu amiguinho.',
                   style: context.textTheme.headline6?.copyWith(
@@ -57,15 +67,15 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: _responsive.dp(2.6)),
+                SizedBox(height: _responsive.dp(1.8)),
                 image != null
                     ? ClipRRect(
                         borderRadius: BorderRadius.circular(600),
                         child: Image.file(
                           image!,
                           fit: BoxFit.cover,
-                          height: _responsive.dp(36),
-                          width: _responsive.dp(36),
+                          height: _responsive.dp(34),
+                          width: _responsive.dp(34),
                         ),
                       )
                     : ClipRRect(
@@ -73,10 +83,10 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
                         child: SizedBox(
                           child: Icon(
                             Icons.question_mark,
-                            size: _responsive.dp(26),
+                            size: _responsive.dp(24),
                           ),
-                          height: _responsive.dp(36),
-                          width: _responsive.dp(36),
+                          height: _responsive.dp(34),
+                          width: _responsive.dp(34),
                         ),
                         // child: Image.asset(
                         //   'assets/images/cropped-akps_header.png',
@@ -85,7 +95,7 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
                         //   width: _responsive.dp(36),
                         // ),
                       ),
-                SizedBox(height: _responsive.dp(2.6)),
+                SizedBox(height: _responsive.dp(1.8)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -95,7 +105,7 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
                         shape: CircleBorder(),
                       ),
                       child: IconButton(
-                        iconSize: 48,
+                        iconSize: _responsive.dp(5.4),
                         color: Colors.white,
                         onPressed: () => pickImage(ImageSource.camera),
                         icon: Icon(Icons.camera_alt_outlined),
@@ -107,48 +117,19 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
                         shape: CircleBorder(),
                       ),
                       child: IconButton(
-                        iconSize: 48,
+                        iconSize: _responsive.dp(5.4),
                         color: Colors.white,
                         onPressed: () => pickImage(ImageSource.gallery),
-                        icon: Icon(Icons.file_copy_outlined),
+                        icon: Icon(Icons.collections),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: _responsive.dp(8)),
+                SizedBox(height: _responsive.dp(6)),
                 InstapetButtom(
                   label: 'CADASTRAR',
                   onPressed: () {},
                   width: context.width,
-                ),
-                SizedBox(height: _responsive.dp(2)),
-                ProgressStepper(
-                  width: 200,
-                  height: 25,
-                  color: Colors.red,
-                  progressColor: Colors.green,
-                  stepCount: 3,
-                  builder: (index) {
-                    double widthOfStep = 200 / 3;
-                    if (index == 1) {
-                      return ProgressStepWithArrow(
-                        width: widthOfStep,
-                        defaultColor: Colors.red,
-                        progressColor: Colors.green,
-                        wasCompleted: true,
-                        child: SizedBox(
-                          child: Text('Teste'),
-                          height: 30,
-                        ),
-                      );
-                    }
-                    return ProgressStepWithChevron(
-                      width: widthOfStep,
-                      defaultColor: Colors.red,
-                      progressColor: Colors.green,
-                      wasCompleted: false,
-                    );
-                  },
                 ),
                 SizedBox(height: _responsive.dp(2)),
               ],

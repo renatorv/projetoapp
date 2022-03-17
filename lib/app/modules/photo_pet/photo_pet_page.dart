@@ -84,6 +84,7 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
                           child: Icon(
                             Icons.question_mark,
                             size: _responsive.dp(24),
+                            color: Colors.black26,
                           ),
                           height: _responsive.dp(34),
                           width: _responsive.dp(34),
@@ -99,30 +100,58 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Ink(
-                      decoration: const ShapeDecoration(
-                        color: Color(0xFFF5591F),
-                        shape: CircleBorder(),
+                    // Ink(
+                    //   decoration: const ShapeDecoration(
+                    //     color: Color(0xFFF5591F),
+                    //     shape: CircleBorder(),
+                    //   ),
+                    //   child: IconButton(
+                    //     iconSize: _responsive.dp(5.4),
+                    //     color: Colors.white,
+                    //     onPressed: () => pickImage(ImageSource.camera),
+                    //     icon: Icon(Icons.camera_alt_outlined),
+                    //   ),
+                    // ),
+                    Material(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
                       ),
-                      child: IconButton(
-                        iconSize: _responsive.dp(5.4),
-                        color: Colors.white,
-                        onPressed: () => pickImage(ImageSource.camera),
-                        icon: Icon(Icons.camera_alt_outlined),
+                      // color: PaletaCores.principal,
+                      child: InkWell(
+                        onTap: () => pickImage(ImageSource.camera),
+                        child: ImageIcon(
+                          AssetImage("assets/icons/camera.png"),
+                          color: Colors.red,
+                          size: _responsive.dp(5.4),
+                        ),
                       ),
                     ),
-                    Ink(
-                      decoration: const ShapeDecoration(
-                        color: Color(0xFFF5591F),
-                        shape: CircleBorder(),
-                      ),
-                      child: IconButton(
-                        iconSize: _responsive.dp(5.4),
-                        color: Colors.white,
-                        onPressed: () => pickImage(ImageSource.gallery),
-                        icon: Icon(Icons.collections),
+                    InkWell(
+                      onTap: () => pickImage(ImageSource.gallery),
+                      child: ImageIcon(
+                        AssetImage("assets/icons/gallery.png"),
+                        color: Colors.red,
+                        size: _responsive.dp(5.4),
                       ),
                     ),
+                    // Ink(
+                    //   decoration: const ShapeDecoration(
+                    //     color: Color(0xFFF5591F),
+                    //     shape: CircleBorder(),
+                    //   ),
+                    //   child: IconButton(
+                    //     iconSize: _responsive.dp(5.4),
+                    //     color: Colors.white,
+                    //     onPressed: () => pickImage(ImageSource.gallery),
+                    //     icon: Icon(Icons.collections),
+                    //   ),
+                    // ),
+                    // Image.asset('assets/images/icons/gallery.png'),
+                    // ImageIcon(
+                    //   AssetImage("assets/images/icons/gallery.png"),
+                    //   color: Colors.red,
+                    //   size: 10,
+                    // ),
                   ],
                 ),
                 SizedBox(height: _responsive.dp(6)),

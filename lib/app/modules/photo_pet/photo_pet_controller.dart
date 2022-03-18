@@ -1,22 +1,20 @@
 import 'package:get/get.dart';
 
+import '../../view_models/photo_pet_view_model.dart';
+
 class PhotoPetController extends GetxController {
   dynamic args = Get.arguments;
 
-  String? _nome, _especie, _raca;
+  PhotoPetViewModel? _pet;
 
   @override
   void onInit() {
     super.onInit();
-    _nome = args[0];
-    _especie = args[1];
-    _raca = args[2];
 
-    print(_nome);
-    print(_especie);
-    print(_raca);
+    _pet = Get.arguments;
   }
+
+  String? get nome => _pet?.nome;
+  String? get especie => _pet?.especie;
+  String? get raca => _pet?.raca;
 }
-
-
-//_nameEC.text, especieId, racaId

@@ -49,14 +49,17 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(
-                  children: [
-                    Flecha(title: 'Cão'),
-                    SizedBox(width: _responsive.dp(.8)),
-                    Flecha(title: 'Biagle'),
-                    SizedBox(width: _responsive.dp(.8)),
-                    Flecha(title: 'Belinha'),
-                  ],
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      Flecha(title: controller.especie!),
+                      SizedBox(width: _responsive.dp(.8)),
+                      Flecha(title: controller.raca!),
+                      SizedBox(width: _responsive.dp(.8)),
+                      Flecha(title: controller.nome!),
+                    ],
+                  ),
                 ),
                 SizedBox(height: _responsive.dp(2)),
                 Text(
@@ -161,6 +164,27 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
                   width: context.width,
                 ),
                 SizedBox(height: _responsive.dp(2)),
+                Center(
+                  child: SizedBox(
+                    height: _responsive.dp(5),
+                    width: _responsive.dp(5),
+                    child: InkWell(
+                      hoverColor: Colors.grey[400],
+                      borderRadius: BorderRadius.circular(50),
+                      child: Container(
+                        height: _responsive.dp(5.5),
+                        width: _responsive.dp(5.5),
+                        decoration: BoxDecoration(shape: BoxShape.circle),
+                        child: ImageIcon(
+                          AssetImage("assets/icons/gallery.png"),
+                          color: Colors.red,
+                          size: _responsive.dp(4),
+                        ),
+                      ),
+                      onTap: () {},
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

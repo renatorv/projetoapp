@@ -6,6 +6,7 @@ import '../../components/instapet_textformfield.dart';
 import '../../core/core.dart';
 import '../../models/animal_model.dart';
 import '../../models/raca_model.dart';
+import '../../view_models/photo_pet_view_model.dart';
 import '../photo_pet/photo_pet_page.dart';
 import './register_pet_controller.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -23,7 +24,7 @@ class _RegisterPetPageState
   final _formKey = GlobalKey<FormState>();
   final _nameEC = TextEditingController();
 
-  String? selectedValue, racaId, especieId;
+  String? selectedValue, racaId, especieId, especieName, racaName;
 
   final GlobalKey<FormFieldState> key = GlobalKey<FormFieldState>();
 
@@ -37,8 +38,13 @@ class _RegisterPetPageState
             final formValid = _formKey.currentState?.validate() ?? false;
 
             if (formValid) {
-              Get.toNamed(PhotoPetPage.ROUTE_PAGE,
-                  arguments: [_nameEC.text, especieId, racaId]);
+              PhotoPetViewModel pet = PhotoPetViewModel(
+                  nome: _nameEC.text,
+                  especie: especieName!,
+                  idEspecie: especieId!,
+                  raca: racaName!,
+                  idRaca: racaId!);
+              Get.toNamed(PhotoPetPage.ROUTE_PAGE, arguments: pet);
             }
           },
           child: Icon(Icons.arrow_forward),
@@ -135,6 +141,7 @@ class _RegisterPetPageState
 
                             var pet = value as Animal;
                             especieId = pet.objectId;
+                            especieName = pet.name;
                             controller.buscaRacasPet(pet.objectId);
                           },
                           onSaved: (value) {
@@ -194,6 +201,7 @@ class _RegisterPetPageState
                             setState(() {});
                             var raca = value as Raca;
                             racaId = raca.idRaca;
+                            racaName = raca.name;
                           },
                           onSaved: (value) {
                             selectedValue = value.toString();

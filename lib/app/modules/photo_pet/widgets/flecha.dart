@@ -22,7 +22,7 @@ class Flecha extends StatelessWidget {
             title,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.black54,
+              color: Colors.black,
               fontWeight: FontWeight.bold,
               fontSize: _responsive.dp(1.6),
             ),

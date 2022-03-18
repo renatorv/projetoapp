@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:projetoapp/app/modules/photo_pet/widgets/flecha.dart';
+import 'package:projetoapp/app/modules/principal/principal_page.dart';
 import '../../components/instapet_appbar.dart';
 import '../../components/instapet_buttom.dart';
 import '../../core/core.dart';
@@ -103,6 +104,49 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
+                    SizedBox(
+                      height: _responsive.dp(5),
+                      width: _responsive.dp(5),
+                      child: InkWell(
+                        hoverColor: Colors.grey[400],
+                        borderRadius: BorderRadius.circular(50),
+                        child: Container(
+                          height: _responsive.dp(5.5),
+                          width: _responsive.dp(5.5),
+                          decoration: BoxDecoration(shape: BoxShape.circle),
+                          child: ImageIcon(
+                            AssetImage("assets/icons/camera.png"),
+                            color: Colors.red,
+                            size: _responsive.dp(4),
+                          ),
+                        ),
+                        onTap: () => pickImage(ImageSource.camera),
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: _responsive.dp(5),
+                      width: _responsive.dp(5),
+                      child: InkWell(
+                        hoverColor: Colors.grey[400],
+                        borderRadius: BorderRadius.circular(50),
+                        child: Container(
+                          height: _responsive.dp(5.5),
+                          width: _responsive.dp(5.5),
+                          decoration: BoxDecoration(shape: BoxShape.circle),
+                          child: ImageIcon(
+                            AssetImage("assets/icons/gallery.png"),
+                            color: Colors.red,
+                            size: _responsive.dp(4),
+                          ),
+                        ),
+                        onTap: () => pickImage(ImageSource.gallery),
+                      ),
+                    )
+
+                    ///
+                    ///
+                    ///
                     // Ink(
                     //   decoration: const ShapeDecoration(
                     //     color: Color(0xFFF5591F),
@@ -115,28 +159,28 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
                     //     icon: Icon(Icons.camera_alt_outlined),
                     //   ),
                     // ),
-                    Material(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      // color: PaletaCores.principal,
-                      child: InkWell(
-                        onTap: () => pickImage(ImageSource.camera),
-                        child: ImageIcon(
-                          AssetImage("assets/icons/camera.png"),
-                          color: Colors.red,
-                          size: _responsive.dp(5.4),
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () => pickImage(ImageSource.gallery),
-                      child: ImageIcon(
-                        AssetImage("assets/icons/gallery.png"),
-                        color: Colors.red,
-                        size: _responsive.dp(5.4),
-                      ),
-                    ),
+                    // Material(
+                    //   shape: RoundedRectangleBorder(
+                    //     borderRadius: BorderRadius.circular(50),
+                    //   ),
+                    //   // color: PaletaCores.principal,
+                    //   child: InkWell(
+                    //     onTap: () => pickImage(ImageSource.camera),
+                    //     child: ImageIcon(
+                    //       AssetImage("assets/icons/camera.png"),
+                    //       color: Colors.red,
+                    //       size: _responsive.dp(5.4),
+                    //     ),
+                    //   ),
+                    // ),
+                    // InkWell(
+                    //   onTap: () => pickImage(ImageSource.gallery),
+                    //   child: ImageIcon(
+                    //     AssetImage("assets/icons/gallery.png"),
+                    //     color: Colors.red,
+                    //     size: _responsive.dp(5.4),
+                    //   ),
+                    // ),
                     // Ink(
                     //   decoration: const ShapeDecoration(
                     //     color: Color(0xFFF5591F),
@@ -157,34 +201,16 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
                     // ),
                   ],
                 ),
-                SizedBox(height: _responsive.dp(6)),
+                SizedBox(height: _responsive.dp(8)),
                 InstapetButtom(
                   label: 'CADASTRAR',
-                  onPressed: () {},
+                  onPressed: () {
+                    if (image != null) {
+                      Get.off(PrincipalPage.ROUTE_PAGE);
+                    }
+                  },
                   width: context.width,
-                ),
-                SizedBox(height: _responsive.dp(2)),
-                Center(
-                  child: SizedBox(
-                    height: _responsive.dp(5),
-                    width: _responsive.dp(5),
-                    child: InkWell(
-                      hoverColor: Colors.grey[400],
-                      borderRadius: BorderRadius.circular(50),
-                      child: Container(
-                        height: _responsive.dp(5.5),
-                        width: _responsive.dp(5.5),
-                        decoration: BoxDecoration(shape: BoxShape.circle),
-                        child: ImageIcon(
-                          AssetImage("assets/icons/gallery.png"),
-                          color: Colors.red,
-                          size: _responsive.dp(4),
-                        ),
-                      ),
-                      onTap: () {},
-                    ),
-                  ),
-                ),
+                )
               ],
             ),
           ),
@@ -194,3 +220,6 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
   }
 }
 //https://www.youtube.com/watch?v=MSv38jO4EJk&t=82s
+
+
+https://stackoverflow.com/questions/51338041/how-to-save-image-file-in-flutter-file-selected-using-image-picker-plugin

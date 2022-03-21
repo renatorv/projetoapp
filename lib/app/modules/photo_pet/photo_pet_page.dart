@@ -4,10 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:projetoapp/app/modules/photo_pet/widgets/flecha.dart';
 import 'package:projetoapp/app/modules/principal/principal_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../components/instapet_appbar.dart';
 import '../../components/instapet_buttom.dart';
 import '../../core/core.dart';
 import './photo_pet_controller.dart';
+
+import 'package:path/path.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as Path;
+import 'package:path_provider/path_provider.dart';
 
 class PhotoPetPage extends StatefulWidget {
   static const String ROUTE_PAGE = '/photo-pet';
@@ -21,6 +27,7 @@ class PhotoPetPage extends StatefulWidget {
 class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
   File? image;
   Future pickImage(ImageSource source) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     try {
       final image = await ImagePicker().pickImage(source: source);
       if (image == null) return;
@@ -28,6 +35,23 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
       final imageTemporary = File(image.path);
 
       setState(() => this.image = imageTemporary);
+
+      TESTAR SE GRAVOU NO SP, SEGUINDO AQUI
+      https://stackoverflow.com/questions/51338041/how-to-save-image-file-in-flutter-file-selected-using-image-picker-plugin
+
+      File imageFile = File(image.path);
+
+      Directory appDocDir = await getApplicationDocumentsDirectory();
+
+      String appDocPath = appDocDir.path;
+
+      final fileName = Path.basename(imageFile.path);
+
+      final File localImage = await imageFile.copy('$appDocPath/$fileName');
+
+      prefs.setString('IMG_PET_LOCAL', localImage.path);
+
+      print('$localImage.path');
     } on Exception catch (e) {
       print('Não foi possível capturar imagem: $e');
     }
@@ -222,4 +246,4 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
 //https://www.youtube.com/watch?v=MSv38jO4EJk&t=82s
 
 
-https://stackoverflow.com/questions/51338041/how-to-save-image-file-in-flutter-file-selected-using-image-picker-plugin
+//https://stackoverflow.com/questions/51338041/how-to-save-image-file-in-flutter-file-selected-using-image-picker-plugin

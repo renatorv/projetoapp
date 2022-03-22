@@ -9,10 +9,7 @@ import '../../components/instapet_appbar.dart';
 import '../../components/instapet_buttom.dart';
 import '../../core/core.dart';
 import './photo_pet_controller.dart';
-
-import 'package:path/path.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart' as Path;
+import 'package:path/path.dart' as caminho;
 import 'package:path_provider/path_provider.dart';
 
 class PhotoPetPage extends StatefulWidget {
@@ -36,8 +33,8 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
 
       setState(() => this.image = imageTemporary);
 
-      TESTAR SE GRAVOU NO SP, SEGUINDO AQUI
-      https://stackoverflow.com/questions/51338041/how-to-save-image-file-in-flutter-file-selected-using-image-picker-plugin
+      // TESTAR SE GRAVOU NO SP, SEGUINDO AQUI
+      // https://stackoverflow.com/questions/51338041/how-to-save-image-file-in-flutter-file-selected-using-image-picker-plugin
 
       File imageFile = File(image.path);
 
@@ -45,7 +42,7 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
 
       String appDocPath = appDocDir.path;
 
-      final fileName = Path.basename(imageFile.path);
+      final fileName = caminho.basename(imageFile.path);
 
       final File localImage = await imageFile.copy('$appDocPath/$fileName');
 
@@ -117,12 +114,6 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
                           height: _responsive.dp(34),
                           width: _responsive.dp(34),
                         ),
-                        // child: Image.asset(
-                        //   'assets/images/cropped-akps_header.png',
-                        //   fit: BoxFit.cover,
-                        //   height: _responsive.dp(36),
-                        //   width: _responsive.dp(36),
-                        // ),
                       ),
                 SizedBox(height: _responsive.dp(1.8)),
                 Row(
@@ -147,7 +138,6 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
                         onTap: () => pickImage(ImageSource.camera),
                       ),
                     ),
-
                     SizedBox(
                       height: _responsive.dp(5),
                       width: _responsive.dp(5),
@@ -167,62 +157,6 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
                         onTap: () => pickImage(ImageSource.gallery),
                       ),
                     )
-
-                    ///
-                    ///
-                    ///
-                    // Ink(
-                    //   decoration: const ShapeDecoration(
-                    //     color: Color(0xFFF5591F),
-                    //     shape: CircleBorder(),
-                    //   ),
-                    //   child: IconButton(
-                    //     iconSize: _responsive.dp(5.4),
-                    //     color: Colors.white,
-                    //     onPressed: () => pickImage(ImageSource.camera),
-                    //     icon: Icon(Icons.camera_alt_outlined),
-                    //   ),
-                    // ),
-                    // Material(
-                    //   shape: RoundedRectangleBorder(
-                    //     borderRadius: BorderRadius.circular(50),
-                    //   ),
-                    //   // color: PaletaCores.principal,
-                    //   child: InkWell(
-                    //     onTap: () => pickImage(ImageSource.camera),
-                    //     child: ImageIcon(
-                    //       AssetImage("assets/icons/camera.png"),
-                    //       color: Colors.red,
-                    //       size: _responsive.dp(5.4),
-                    //     ),
-                    //   ),
-                    // ),
-                    // InkWell(
-                    //   onTap: () => pickImage(ImageSource.gallery),
-                    //   child: ImageIcon(
-                    //     AssetImage("assets/icons/gallery.png"),
-                    //     color: Colors.red,
-                    //     size: _responsive.dp(5.4),
-                    //   ),
-                    // ),
-                    // Ink(
-                    //   decoration: const ShapeDecoration(
-                    //     color: Color(0xFFF5591F),
-                    //     shape: CircleBorder(),
-                    //   ),
-                    //   child: IconButton(
-                    //     iconSize: _responsive.dp(5.4),
-                    //     color: Colors.white,
-                    //     onPressed: () => pickImage(ImageSource.gallery),
-                    //     icon: Icon(Icons.collections),
-                    //   ),
-                    // ),
-                    // Image.asset('assets/images/icons/gallery.png'),
-                    // ImageIcon(
-                    //   AssetImage("assets/images/icons/gallery.png"),
-                    //   color: Colors.red,
-                    //   size: 10,
-                    // ),
                   ],
                 ),
                 SizedBox(height: _responsive.dp(8)),
@@ -230,11 +164,11 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
                   label: 'CADASTRAR',
                   onPressed: () {
                     if (image != null) {
-                      Get.off(PrincipalPage.ROUTE_PAGE);
+                      Get.toNamed(PrincipalPage.ROUTE_PAGE);
                     }
                   },
                   width: context.width,
-                )
+                ),
               ],
             ),
           ),
@@ -243,7 +177,3 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
     );
   }
 }
-//https://www.youtube.com/watch?v=MSv38jO4EJk&t=82s
-
-
-//https://stackoverflow.com/questions/51338041/how-to-save-image-file-in-flutter-file-selected-using-image-picker-plugin

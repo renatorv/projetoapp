@@ -3,7 +3,6 @@ import 'package:projetoapp/app/models/user_logged.dart';
 import 'package:projetoapp/app/modules/home/home.dart';
 import 'package:projetoapp/app/modules/login/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../core/mixins/mixins.dart';
 import '../../models/animal_model.dart';
 import '../../repositories/pet_repository.dart';

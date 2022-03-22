@@ -51,3 +51,10 @@ ICONES PARA TESTAR
 https://m-noer.github.io/#/
 
 https://icons8.com/line-awesome
+
+*************************************************************************************************************************
+links utilizado para gravar as imagens na SP.
+//https://www.youtube.com/watch?v=MSv38jO4EJk&t=82s
+//https://stackoverflow.com/questions/51338041/how-to-save-image-file-in-flutter-file-selected-using-image-picker-plugin
+
+*************************************************************************************************************************

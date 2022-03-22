@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:projetoapp/app/core/constants/constants.dart';
 import 'package:projetoapp/app/models/user_logged.dart';
 import 'package:projetoapp/app/modules/home/home.dart';
 import 'package:projetoapp/app/modules/login/login.dart';
@@ -46,9 +47,9 @@ class SplashController extends GetxController with LoaderMixin, MessageMixin {
     switch (userLogged) {
       case UserLogged.authententicate:
 
-        /// Se tiver a chave 'pet' já configurada, significa que o usuário
+        /// Se tiver essa chave já configurada, significa que o usuário
         /// já cadastrou o pet, caso contrário é necessário realizar o cadastro
-        if (sp.containsKey('pet')) {
+        if (sp.containsKey(Constants.PHOTO_PET)) {
           Get.offAllNamed(HomePage.ROUTE_PAGE);
         } else {
           try {

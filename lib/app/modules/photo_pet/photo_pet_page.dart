@@ -2,8 +2,8 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:projetoapp/app/core/constants/constants.dart';
 import 'package:projetoapp/app/modules/photo_pet/widgets/flecha.dart';
-import 'package:projetoapp/app/modules/principal/principal_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../components/instapet_appbar.dart';
 import '../../components/instapet_buttom.dart';
@@ -46,9 +46,7 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
 
       final File localImage = await imageFile.copy('$appDocPath/$fileName');
 
-      prefs.setString('IMG_PET_LOCAL', localImage.path);
-
-      print('$localImage.path');
+      prefs.setString(Constants.PHOTO_PET, localImage.path);
     } on Exception catch (e) {
       print('Não foi possível capturar imagem: $e');
     }
@@ -162,11 +160,12 @@ class _PhotoPetPageState extends InstaState<PhotoPetPage, PhotoPetController> {
                 SizedBox(height: _responsive.dp(8)),
                 InstapetButtom(
                   label: 'CADASTRAR',
-                  onPressed: () {
-                    if (image != null) {
-                      Get.toNamed(PrincipalPage.ROUTE_PAGE);
-                    }
-                  },
+                  // onPressed: () {
+                  //   if (image != null) {
+                  //     Get.offAllNamed(PrincipalPage.ROUTE_PAGE);
+                  //   }
+                  // },
+                  onPressed: () => controller.cadastraPet(image),
                   width: context.width,
                 ),
               ],

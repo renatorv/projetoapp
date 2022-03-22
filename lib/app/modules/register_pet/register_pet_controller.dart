@@ -26,9 +26,6 @@ class RegisterPetController extends GetxController
 
     _animal = _animalModel.result;
 
-    for (var p in _animalModel.result) {
-      print(p.name);
-    }
     update();
   }
 
@@ -45,10 +42,6 @@ class RegisterPetController extends GetxController
       RacaModel _racaModel = await _repository.pegaRacas(pet);
 
       _racas = _racaModel.result;
-
-      // for (var r in _racas) {
-      //   print('Raça => ${r.name}');
-      // }
 
       _loading.toggle();
     } catch (e) {

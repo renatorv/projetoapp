@@ -1,6 +1,9 @@
 import 'package:get/get.dart';
+import 'package:projetoapp/app/modules/home/home.dart';
 
 import '../../view_models/photo_pet_view_model.dart';
+
+import 'dart:io';
 
 class PhotoPetController extends GetxController {
   dynamic args = Get.arguments;
@@ -17,4 +20,10 @@ class PhotoPetController extends GetxController {
   String? get nome => _pet?.nome;
   String? get especie => _pet?.especie;
   String? get raca => _pet?.raca;
+
+  Future<void> cadastraPet(File? image) async {
+    if (image != null) {
+      Get.offAllNamed(HomePage.ROUTE_PAGE);
+    }
+  }
 }

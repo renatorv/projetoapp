@@ -1,10 +1,22 @@
+import 'package:flutter/src/widgets/navigator.dart';
 import 'package:get/get.dart';
 import 'package:projetoapp/app/models/user_model.dart';
+import 'package:projetoapp/app/modules/home_navigator/home_navigator_bindings.dart';
+import 'package:projetoapp/app/modules/home_navigator/home_navigator_page.dart';
 import 'package:projetoapp/app/modules/login/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../info_navigator/info_navigator_bindings.dart';
+import '../info_navigator/info_navigator_page.dart';
+
 class HomeController extends GetxController {
   final _name = ''.obs;
+
+  static const NAVIGATOR_KEY = 1;
+
+  final _tabIndex = 0.obs;
+  final _tabs = ['/home-navigator', '/info-navigator', '/exit'];
+
   @override
   void onInit() {
     super.onInit();
@@ -12,6 +24,18 @@ class HomeController extends GetxController {
   }
 
   RxString get name => _name;
+  int get tabIndex => _tabIndex.value;
+
+  set tabIndex(int index) {
+    _tabIndex(index);
+
+    if (_tabs[index] == '/exit') {
+      // chamar método de sair
+      // 1 e 10 aula 3
+    } else {
+      Get.toNamed(_tabs[index], id: NAVIGATOR_KEY);
+    }
+  }
 
   Future<void> pegaDadosLogin() async {
     final sp = await SharedPreferences.getInstance();
@@ -31,4 +55,26 @@ class HomeController extends GetxController {
 
     Get.offAllNamed(LoginPage.ROUTE_PAGE);
   }
+
+  Route? onGeneratedRouter(RouteSettings settings) {
+    if (settings.name == '/home-navigator') {
+      return GetPageRoute(
+        settings: settings,
+        page: () => const HomeNavigatorPage(),
+        binding: HomeNavigatorBindings(),
+        transition: Transition.fadeIn,
+      );
+    }
+
+    if (settings.name == '/info-navigator') {
+      return GetPageRoute(
+        settings: settings,
+        page: () => const InfoNavigatorPage(),
+        binding: InfoNavigatorBindings(),
+        transition: Transition.fadeIn,
+      );
+    }
+  }
 }
+
+parei em 1 e 13 aula 3

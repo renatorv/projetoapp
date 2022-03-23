@@ -6,7 +6,6 @@ import 'package:projetoapp/app/modules/register/register.dart';
 import 'package:projetoapp/app/modules/splash/splash.dart';
 
 import '../modules/photo_pet/photo_pet.dart';
-import '../modules/principal/principal.dart';
 import '../modules/register_pet/register_pet.dart';
 
 class UiConfig {
@@ -62,11 +61,6 @@ class UiConfig {
       name: PhotoPetPage.ROUTE_PAGE,
       page: () => PhotoPetPage(),
       binding: PhotoPetBindings(),
-    ),
-    GetPage(
-      name: PrincipalPage.ROUTE_PAGE,
-      page: () => PrincipalPage(),
-      binding: PrincipalBindings(),
     ),
   ];
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:projetoapp/app/core/insta_state.dart';
+import 'package:projetoapp/app/core/core.dart';
 import '../../components/instapet_appbar.dart';
 import './home_controller.dart';
 
@@ -16,6 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends InstaState<HomePage, HomeController> {
   @override
   Widget build(BuildContext context) {
+    final Responsive _responsive = Responsive(context);
     return Scaffold(
       appBar: InstapetAppbar(elevation: 0),
       backgroundColor: Colors.white,
@@ -23,16 +24,22 @@ class _HomePageState extends InstaState<HomePage, HomeController> {
         return BottomNavigationBar(
           onTap: (value) => controller.tabIndex = value,
           currentIndex: controller.tabIndex,
+          selectedIconTheme: IconThemeData(
+            color: PaletaCores.principal,
+            size: _responsive.dp(4.6),
+          ),
+          selectedItemColor: PaletaCores.principal,
+          selectedFontSize: _responsive.dp(2.6),
           items: const [
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Home',
             ),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: Icon(Icons.info),
               label: 'Dados',
             ),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: Icon(Icons.exit_to_app),
               label: 'Sair',
             ),

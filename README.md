@@ -58,3 +58,6 @@ links utilizado para gravar as imagens na SP.
 //https://stackoverflow.com/questions/51338041/how-to-save-image-file-in-flutter-file-selected-using-image-picker-plugin
 
 *************************************************************************************************************************
+
+https://pub.dev/packages/story_time
+https://pub.dev/packages/story

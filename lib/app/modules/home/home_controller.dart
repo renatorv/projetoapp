@@ -32,6 +32,7 @@ class HomeController extends GetxController {
     if (_tabs[index] == '/exit') {
       // chamar método de sair
       // 1 e 10 aula 3
+      sair();
     } else {
       Get.toNamed(_tabs[index], id: NAVIGATOR_KEY);
     }
@@ -77,4 +78,4 @@ class HomeController extends GetxController {
   }
 }
 
-parei em 1 e 13 aula 3
+//parei em 1 e 13 aula 3

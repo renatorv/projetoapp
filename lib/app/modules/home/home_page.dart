@@ -36,8 +36,12 @@ class _HomePageState extends InstaState<HomePage, HomeController> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.info),
-              label: 'Dados',
+              icon: Icon(Icons.pets),
+              label: 'Pet',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle_sharp),
+              label: 'Tutor',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.exit_to_app),
@@ -52,24 +56,5 @@ class _HomePageState extends InstaState<HomePage, HomeController> {
         onGenerateRoute: controller.onGeneratedRouter,
       ),
     );
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     title: const Text('HomePage'),
-    //   ),
-    //   body: Column(
-    //     mainAxisAlignment: MainAxisAlignment.center,
-    //     children: [
-    //       Center(
-    //         child: Obx(() => Text(controller.name.toString())),
-    //       ),
-    //       Center(
-    //         child: TextButton(
-    //           onPressed: () => controller.sair(),
-    //           child: Text('Sair'),
-    //         ),
-    //       ),
-    //     ],
-    //   ),
-    // );
   }
 }

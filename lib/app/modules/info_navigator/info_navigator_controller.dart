@@ -14,7 +14,7 @@ class InfoNavigatorController extends GetxController {
     super.onInit();
     SharedPreferences sp = await SharedPreferences.getInstance();
 
-    _img = sp.getString(Constants.PHOTO_PET);
+    _img = sp.getString('pet');
 
     final objeto = sp.getString(Constants.OBJETO_PET);
 

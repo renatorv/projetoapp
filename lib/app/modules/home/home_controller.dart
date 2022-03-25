@@ -9,13 +9,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../info_navigator/info_navigator_bindings.dart';
 import '../info_navigator/info_navigator_page.dart';
 
+import '../info_navigator_tutor/info_navigator_tutor_bindings.dart';
+import '../info_navigator_tutor/info_navigator_tutor_page.dart';
+
 class HomeController extends GetxController {
   final _name = ''.obs;
 
   static const NAVIGATOR_KEY = 1;
 
   final _tabIndex = 0.obs;
-  final _tabs = ['/home-navigator', '/info-navigator', '/exit'];
+  final _tabs = [
+    '/home-navigator',
+    '/info-navigator',
+    '/info-navigator-tutor',
+    '/exit'
+  ];
 
   @override
   void onInit() {
@@ -75,7 +83,14 @@ class HomeController extends GetxController {
         transition: Transition.fadeIn,
       );
     }
+
+    if (settings.name == '/info-navigator-tutor') {
+      return GetPageRoute(
+        settings: settings,
+        page: () => const InfoNavigatorTutorPage(),
+        binding: InfoNavigatorTutorBindings(),
+        transition: Transition.fadeIn,
+      );
+    }
   }
 }
-
-//parei em 1 e 13 aula 3

@@ -61,3 +61,6 @@ links utilizado para gravar as imagens na SP.
 
 https://pub.dev/packages/story_time
 https://pub.dev/packages/story
+
+Perfil:
+//https://medium.com/@palmeiro.leonardo/simple-profile-screen-with-flutter-fe2f1f7cfaf5

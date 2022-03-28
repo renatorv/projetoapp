@@ -115,32 +115,26 @@ class _InfoNavigatorTutorPageState
                     ),
                   ),
                 ),
-                // Divider(),
-                // Padding(
-                //   padding: EdgeInsets.only(
-                //     right: _responsive.dp(3.6),
-                //     left: _responsive.dp(3.6),
-                //     bottom: _responsive.dp(3.6),
-                //   ),
-                //   child: Center(
-                //     child: InstapetButtom(
-                //       label: 'ATUALIZAR',
-                //       onPressed: () {},
-                //       width: context.width,
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ),
-          Divider(),
-          Divider(),
           Listener(
             onPointerUp: (_) => setState(() => isPressed = false),
             onPointerDown: (_) => setState(() => isPressed = true),
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 100),
               child: Container(
+                height: _responsive.dp(8),
+                width: _responsive.dp(45),
+                child: Center(
+                    child: Text(
+                  'CADASTRAR',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )),
                 padding: EdgeInsets.only(
                   right: _responsive.dp(1),
                   left: _responsive.dp(1),
@@ -166,7 +160,6 @@ class _InfoNavigatorTutorPageState
                           ),
                         ],
                 ),
-                child: SizedBox(height: 100, width: 100),
               ),
             ),
           ),

@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:projetoapp/app/components/instapet_textformfield_ready_only.dart';
 import '../../components/instapet_buttom.dart';
 import '../../core/core.dart';
 import './info_navigator_controller.dart';
+import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
+import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 
 class InfoNavigatorPage extends StatefulWidget {
   const InfoNavigatorPage({Key? key}) : super(key: key);
@@ -14,9 +15,14 @@ class InfoNavigatorPage extends StatefulWidget {
 
 class _InfoNavigatorPageState
     extends InstaState<InfoNavigatorPage, InfoNavigatorController> {
+  bool isPressed = false;
   @override
   Widget build(BuildContext context) {
     final Responsive _responsive = Responsive(context);
+
+    const backGroundColor = PaletaCores.principal;
+    Offset distance = isPressed ? Offset(18, 18) : Offset(-5, -5);
+    double blur = isPressed ? 2 : 12;
 
     return GetBuilder<InfoNavigatorController>(
       builder: (_) => Column(
@@ -120,19 +126,72 @@ class _InfoNavigatorPageState
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                    right: _responsive.dp(3.6),
-                    left: _responsive.dp(3.6),
-                    bottom: _responsive.dp(3.6),
+                    bottom: _responsive.dp(3),
+                    right: _responsive.dp(4.5),
+                    left: _responsive.dp(4.5),
                     top: _responsive.dp(3),
                   ),
-                  child: Center(
-                    child: InstapetButtom(
-                      label: 'ATUALIZAR',
-                      onPressed: () {},
-                      width: context.width,
+                  child: Listener(
+                    onPointerUp: (_) => setState(() => isPressed = false),
+                    onPointerDown: (_) => setState(() => isPressed = true),
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 100),
+                      child: Container(
+                        height: _responsive.dp(8),
+                        width: _responsive.dp(45),
+                        child: Center(
+                            child: Text(
+                          'CADASTRAR',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
+                        padding: EdgeInsets.only(
+                          right: _responsive.dp(1),
+                          left: _responsive.dp(1),
+                          bottom: _responsive.dp(1),
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: backGroundColor,
+                          boxShadow: isPressed
+                              ? []
+                              : [
+                                  BoxShadow(
+                                    color: PaletaCores.principalSecundaria,
+                                    offset: -distance,
+                                    blurRadius: blur,
+                                    inset: isPressed,
+                                  ),
+                                  BoxShadow(
+                                    color: PaletaCores.principalSecundaria,
+                                    offset: -distance,
+                                    blurRadius: blur,
+                                    inset: isPressed,
+                                  ),
+                                ],
+                        ),
+                      ),
                     ),
                   ),
                 ),
+                // Padding(
+                //   padding: EdgeInsets.only(
+                //     right: _responsive.dp(3.6),
+                //     left: _responsive.dp(3.6),
+                //     bottom: _responsive.dp(3.6),
+                //     top: _responsive.dp(3),
+                //   ),
+                //   child: Center(
+                //     child: InstapetButtom(
+                //       label: 'ATUALIZAR',
+                //       onPressed: () {},
+                //       width: context.width,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),

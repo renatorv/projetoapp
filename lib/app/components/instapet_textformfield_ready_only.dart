@@ -17,13 +17,13 @@ class InstapetTextformfieldReadyOnly extends StatelessWidget {
     this.validator,
     this.onChange,
     this.obscureText = false,
-    this.readyOnly = false,
+    this.readyOnly = true,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      readOnly: true,
+      readOnly: readyOnly,
       controller: controller,
       obscureText: obscureText,
       validator: validator,

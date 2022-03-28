@@ -27,10 +27,10 @@ class _InfoNavigatorPageState
               gradient: PaletaCores.degradePerfil,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(
-                  _responsive.dp(8),
+                  _responsive.dp(5),
                 ),
                 bottomRight: Radius.circular(
-                  _responsive.dp(8),
+                  _responsive.dp(5),
                 ),
               ),
             ),
@@ -85,57 +85,45 @@ class _InfoNavigatorPageState
                     ),
                   ),
                 ),
-                Divider(),
                 Padding(
                   padding: EdgeInsets.only(
                     right: _responsive.dp(3.6),
                     left: _responsive.dp(3.6),
+                    bottom: _responsive.dp(1.8),
                   ),
                   child: InstapetTextformfieldReadyOnly(
                     label: 'Nome',
                     controller: controller.nameEC,
                   ),
                 ),
-                Divider(),
-                ListTile(
-                  title: Text(
-                    'Gênero',
-                    style: TextStyle(
-                      color: PaletaCores.principal,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    right: _responsive.dp(3.6),
+                    left: _responsive.dp(3.6),
+                    bottom: _responsive.dp(1.8),
                   ),
-                  subtitle: Text(
-                    'Feminino',
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
+                  child: InstapetTextformfieldReadyOnly(
+                    label: 'Feminino',
+                    controller: controller.nameEC,
                   ),
                 ),
-                Divider(),
-                ListTile(
-                  title: Text(
-                    'Idade',
-                    style: TextStyle(
-                      color: PaletaCores.principal,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    right: _responsive.dp(3.6),
+                    left: _responsive.dp(3.6),
                   ),
-                  subtitle: Text(
-                    '2 aninhos',
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
+                  child: InstapetTextformfieldReadyOnly(
+                    readyOnly: false,
+                    label: '2 aninhos',
+                    controller: controller.nameEC,
                   ),
                 ),
-                Divider(),
                 Padding(
                   padding: EdgeInsets.only(
                     right: _responsive.dp(3.6),
                     left: _responsive.dp(3.6),
                     bottom: _responsive.dp(3.6),
+                    top: _responsive.dp(3),
                   ),
                   child: Center(
                     child: InstapetButtom(

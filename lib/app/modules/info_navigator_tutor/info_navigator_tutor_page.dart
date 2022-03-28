@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
-import 'package:flutter/material.dart';
 import 'package:projetoapp/app/components/instapet_buttom.dart';
 import '../../core/core.dart';
 import './info_navigator_tutor_controller.dart';
+import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
+import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 
 class InfoNavigatorTutorPage extends StatefulWidget {
   const InfoNavigatorTutorPage({Key? key}) : super(key: key);
@@ -13,9 +14,14 @@ class InfoNavigatorTutorPage extends StatefulWidget {
 
 class _InfoNavigatorTutorPageState
     extends InstaState<InfoNavigatorTutorPage, InfoNavigatorTutorController> {
+  bool isPressed = false;
   @override
   Widget build(BuildContext context) {
     final Responsive _responsive = Responsive(context);
+
+    const backGroundColor = PaletaCores.principal;
+    Offset distance = isPressed ? Offset(18, 18) : Offset(-5, -5);
+    double blur = isPressed ? 2 : 12;
 
     return GetBuilder<InfoNavigatorTutorController>(
       builder: (_) => Column(
@@ -25,13 +31,13 @@ class _InfoNavigatorTutorPageState
             decoration: BoxDecoration(
               gradient: PaletaCores.degradePerfil,
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(
-                  _responsive.dp(8),
-                ),
-                bottomRight: Radius.circular(
-                  _responsive.dp(8),
-                ),
-              ),
+                  // bottomLeft: Radius.circular(
+                  //   _responsive.dp(8),
+                  // ),
+                  // bottomRight: Radius.circular(
+                  //   _responsive.dp(8),
+                  // ),
+                  ),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -109,24 +115,62 @@ class _InfoNavigatorTutorPageState
                     ),
                   ),
                 ),
-                Divider(),
-                Padding(
-                  padding: EdgeInsets.only(
-                    right: _responsive.dp(3.6),
-                    left: _responsive.dp(3.6),
-                    bottom: _responsive.dp(3.6),
-                  ),
-                  child: Center(
-                    child: InstapetButtom(
-                      label: 'ATUALIZAR',
-                      onPressed: () {},
-                      width: context.width,
-                    ),
-                  ),
-                ),
+                // Divider(),
+                // Padding(
+                //   padding: EdgeInsets.only(
+                //     right: _responsive.dp(3.6),
+                //     left: _responsive.dp(3.6),
+                //     bottom: _responsive.dp(3.6),
+                //   ),
+                //   child: Center(
+                //     child: InstapetButtom(
+                //       label: 'ATUALIZAR',
+                //       onPressed: () {},
+                //       width: context.width,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
+          Divider(),
+          Divider(),
+          Listener(
+            onPointerUp: (_) => setState(() => isPressed = false),
+            onPointerDown: (_) => setState(() => isPressed = true),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 100),
+              child: Container(
+                padding: EdgeInsets.only(
+                  right: _responsive.dp(1),
+                  left: _responsive.dp(1),
+                  bottom: _responsive.dp(1),
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: backGroundColor,
+                  boxShadow: isPressed
+                      ? []
+                      : [
+                          BoxShadow(
+                            color: PaletaCores.principalSecundaria,
+                            offset: -distance,
+                            blurRadius: blur,
+                            inset: isPressed,
+                          ),
+                          BoxShadow(
+                            color: PaletaCores.principalSecundaria,
+                            offset: -distance,
+                            blurRadius: blur,
+                            inset: isPressed,
+                          ),
+                        ],
+                ),
+                child: SizedBox(height: 100, width: 100),
+              ),
+            ),
+          ),
+          Padding(padding: EdgeInsets.only(bottom: 30))
         ],
       ),
     );

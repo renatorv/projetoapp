@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:projetoapp/app/core/constants/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -7,10 +8,10 @@ import '../../view_models/photo_pet_view_model.dart';
 class InfoNavigatorController extends GetxController {
   String? _img;
 
-  String _nome = '';
+  final _nameEC = TextEditingController();
 
   @override
-  Future<void> onInit() async {
+  void onInit() async {
     super.onInit();
     SharedPreferences sp = await SharedPreferences.getInstance();
 
@@ -20,15 +21,15 @@ class InfoNavigatorController extends GetxController {
 
     PhotoPetViewModel pet = PhotoPetViewModel.fromJson(objeto!);
 
-    _nome = pet.nome;
-
-    update();
+    if (pet.nome != null && pet.nome != "") {
+      _nameEC.text = pet.nome;
+      update();
+    } else {
+      _nameEC.text = "a";
+      update();
+    }
   }
 
   String? get imagem => _img;
-  String get nome => _nome;
+  TextEditingController get nameEC => _nameEC;
 }
-
-
-//prefs.setString(Constants.OBJETO_PET, _pet!.toJson());
-//PhotoPetViewModel? _pet;

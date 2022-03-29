@@ -1,9 +1,17 @@
 import 'package:get/get.dart';
 import 'package:projetoapp/app/components/instapet_textformfield_ready_only.dart';
+import '../../components/instapet_buttom.dart';
 import '../../core/core.dart';
 import './info_navigator_controller.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
+
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../components/instapet_textformfield_ready_only.dart';
+import 'package:path/path.dart' as caminho;
+import 'package:path_provider/path_provider.dart';
 
 class InfoNavigatorPage extends StatefulWidget {
   const InfoNavigatorPage({Key? key}) : super(key: key);
@@ -14,14 +22,39 @@ class InfoNavigatorPage extends StatefulWidget {
 
 class _InfoNavigatorPageState
     extends InstaState<InfoNavigatorPage, InfoNavigatorController> {
-  bool isPressed = false;
+  File? image;
+  Future pickImage(ImageSource source) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    try {
+      final image = await ImagePicker().pickImage(source: source);
+      if (image == null) return;
+
+      final imageTemporary = File(image.path);
+
+      setState(() => this.image = imageTemporary);
+
+      // TESTAR SE GRAVOU NO SP, SEGUINDO AQUI
+      // https://stackoverflow.com/questions/51338041/how-to-save-image-file-in-flutter-file-selected-using-image-picker-plugin
+
+      File imageFile = File(image.path);
+
+      Directory appDocDir = await getApplicationDocumentsDirectory();
+
+      String appDocPath = appDocDir.path;
+
+      final fileName = caminho.basename(imageFile.path);
+
+      final File localImage = await imageFile.copy('$appDocPath/$fileName');
+
+      prefs.setString('pet', localImage.path);
+    } on Exception catch (e) {
+      print('Não foi possível capturar imagem: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final Responsive _responsive = Responsive(context);
-
-    const backGroundColor = PaletaCores.principal;
-    Offset distance = isPressed ? Offset(18, 18) : Offset(-5, -5);
-    double blur = isPressed ? 2 : 12;
 
     return GetBuilder<InfoNavigatorController>(
       builder: (_) => Column(
@@ -30,14 +63,6 @@ class _InfoNavigatorPageState
             height: _responsive.dp(26),
             decoration: BoxDecoration(
               gradient: PaletaCores.degradePerfil,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(
-                  _responsive.dp(5),
-                ),
-                bottomRight: Radius.circular(
-                  _responsive.dp(5),
-                ),
-              ),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -46,32 +71,56 @@ class _InfoNavigatorPageState
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.white,
-                      minRadius: _responsive.dp(4.6),
-                      child: ImageIcon(
-                        AssetImage("assets/icons/gallery.png"),
-                        color: Colors.red,
-                        size: _responsive.dp(4),
-                      ),
-                    ),
-                    CircleAvatar(
-                      backgroundColor: Colors.white,
-                      minRadius: _responsive.dp(7.6),
+                    GestureDetector(
+                      onTap: () => pickImage(ImageSource.camera),
                       child: CircleAvatar(
-                        radius: _responsive.dp(6),
-                        backgroundImage: NetworkImage(
-                          'https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg',
+                        backgroundColor: Colors.white,
+                        minRadius: _responsive.dp(4.6),
+                        child: ImageIcon(
+                          AssetImage("assets/icons/camera.png"),
+                          color: Colors.red,
+                          size: _responsive.dp(4),
                         ),
                       ),
                     ),
-                    CircleAvatar(
-                      backgroundColor: Colors.white,
-                      minRadius: _responsive.dp(4.6),
-                      child: ImageIcon(
-                        AssetImage("assets/icons/camera.png"),
-                        color: Colors.red,
-                        size: _responsive.dp(4),
+                    controller.imagem != null
+                        ? CircleAvatar(
+                            backgroundImage:
+                                FileImage(File(controller.imagem!)),
+                            radius: 72,
+                            backgroundColor: Colors.white,
+                          )
+                        : CircleAvatar(
+                            backgroundColor: Colors.white,
+                            minRadius: _responsive.dp(12),
+                            child: CircleAvatar(
+                              radius: _responsive.dp(11),
+                              child: image != null
+                                  ? ClipOval(
+                                      child: Image.file(
+                                        image!,
+                                        fit: BoxFit.cover,
+                                        height: _responsive.dp(34),
+                                        width: _responsive.dp(34),
+                                      ),
+                                    )
+                                  : Icon(
+                                      Icons.question_mark,
+                                      size: _responsive.dp(10),
+                                      color: Colors.black26,
+                                    ),
+                            ),
+                          ),
+                    GestureDetector(
+                      onTap: () => pickImage(ImageSource.gallery),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        minRadius: _responsive.dp(4.6),
+                        child: ImageIcon(
+                          AssetImage("assets/icons/gallery.png"),
+                          color: Colors.red,
+                          size: _responsive.dp(4),
+                        ),
                       ),
                     ),
                   ],
@@ -82,6 +131,7 @@ class _InfoNavigatorPageState
           Expanded(
             child: ListView(
               children: [
+                Divider(thickness: 1.0),
                 ListTile(
                   subtitle: Text(
                     'Sou um cãozinho tímido, mas que conquista corações!',
@@ -90,6 +140,7 @@ class _InfoNavigatorPageState
                     ),
                   ),
                 ),
+                Divider(thickness: 1.0),
                 Padding(
                   padding: EdgeInsets.only(
                     right: _responsive.dp(3.6),
@@ -123,59 +174,15 @@ class _InfoNavigatorPageState
                     controller: controller.nameEC,
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    bottom: _responsive.dp(2),
-                    right: _responsive.dp(3),
-                    left: _responsive.dp(3),
-                    top: _responsive.dp(2),
-                  ),
-                  child: Listener(
-                    onPointerUp: (_) => setState(() => isPressed = false),
-                    onPointerDown: (_) => setState(() => isPressed = true),
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 100),
-                      child: Container(
-                        height: _responsive.dp(8),
-                        width: _responsive.dp(45),
-                        child: Center(
-                            child: Text(
-                          'ATUALIZAR',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )),
-                        padding: EdgeInsets.only(
-                          right: _responsive.dp(1),
-                          left: _responsive.dp(1),
-                          bottom: _responsive.dp(1),
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: backGroundColor,
-                          boxShadow: isPressed
-                              ? []
-                              : [
-                                  BoxShadow(
-                                    color: PaletaCores.principalSecundaria,
-                                    offset: -distance,
-                                    blurRadius: blur,
-                                    inset: isPressed,
-                                  ),
-                                  BoxShadow(
-                                    color: PaletaCores.principalSecundaria,
-                                    offset: -distance,
-                                    blurRadius: blur,
-                                    inset: isPressed,
-                                  ),
-                                ],
-                        ),
-                      ),
-                    ),
+                SizedBox(height: _responsive.dp(5)),
+                Center(
+                  child: InstapetButtom(
+                    label: 'ATUALIZAR',
+                    onPressed: () {},
+                    width: context.width * .86,
                   ),
                 ),
+                SizedBox(height: _responsive.dp(3)),
               ],
             ),
           ),

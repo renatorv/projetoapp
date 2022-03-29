@@ -6,8 +6,7 @@ import 'package:projetoapp/app/core/core.dart';
 import 'package:projetoapp/app/modules/register/register.dart';
 import 'package:validatorless/validatorless.dart';
 import './login_controller.dart';
-import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
-import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
+import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
   static const String ROUTE_PAGE = '/login';
@@ -23,8 +22,6 @@ class _LoginPageState extends InstaState<LoginPage, LoginController> {
   final _emailEC = TextEditingController();
   final _passwordEC = TextEditingController();
 
-  bool isPressed = false;
-
   @override
   void dispose() {
     _emailEC.dispose();
@@ -36,9 +33,6 @@ class _LoginPageState extends InstaState<LoginPage, LoginController> {
   Widget build(BuildContext context) {
     final Responsive _responsive = Responsive(context);
 
-    const backGroundColor = PaletaCores.principal;
-    Offset distance = isPressed ? Offset(18, 18) : Offset(-5, -5);
-    double blur = isPressed ? 2 : 12;
     return Scaffold(
       appBar: InstapetAppbar(elevation: 0),
       backgroundColor: Colors.white,
@@ -94,90 +88,21 @@ class _LoginPageState extends InstaState<LoginPage, LoginController> {
                           ),
                         ),
                         SizedBox(height: _responsive.dp(4.6)),
-                        // Center(
-                        //   child: InstapetButtom(
-                        //     label: 'ENTRAR',
-                        //     onPressed: () {
-                        //       final formValid =
-                        //           _formKeyLogin.currentState?.validate() ??
-                        //               false;
-                        //       if (formValid) {
-                        //         controller.login(
-                        //           _emailEC.text,
-                        //           _passwordEC.text,
-                        //         );
-                        //       }
-                        //     },
-                        //     width: context.width,
-                        //   ),
-                        // ),
-                        GestureDetector(
-                          onTap: () {
-                            final formValid =
-                                _formKeyLogin.currentState?.validate() ?? false;
-                            if (formValid) {
-                              controller.login(
-                                _emailEC.text,
-                                _passwordEC.text,
-                              );
-                            }
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              bottom: _responsive.dp(2),
-                              right: _responsive.dp(3),
-                              left: _responsive.dp(3),
-                              top: _responsive.dp(2),
-                            ),
-                            child: Listener(
-                              onPointerUp: (_) =>
-                                  setState(() => isPressed = false),
-                              onPointerDown: (_) =>
-                                  setState(() => isPressed = true),
-                              child: AnimatedContainer(
-                                duration: const Duration(milliseconds: 100),
-                                child: Container(
-                                  height: _responsive.dp(8),
-                                  width: _responsive.dp(45),
-                                  child: Center(
-                                      child: Text(
-                                    'ENTRAR',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  )),
-                                  padding: EdgeInsets.only(
-                                    right: _responsive.dp(1),
-                                    left: _responsive.dp(1),
-                                    bottom: _responsive.dp(1),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(30),
-                                    color: backGroundColor,
-                                    boxShadow: isPressed
-                                        ? []
-                                        : [
-                                            BoxShadow(
-                                              color: PaletaCores
-                                                  .principalSecundaria,
-                                              offset: -distance,
-                                              blurRadius: blur,
-                                              inset: isPressed,
-                                            ),
-                                            BoxShadow(
-                                              color: PaletaCores
-                                                  .principalSecundaria,
-                                              offset: -distance,
-                                              blurRadius: blur,
-                                              inset: isPressed,
-                                            ),
-                                          ],
-                                  ),
-                                ),
-                              ),
-                            ),
+                        Center(
+                          child: InstapetButtom(
+                            label: 'ENTRAR',
+                            onPressed: () {
+                              final formValid =
+                                  _formKeyLogin.currentState?.validate() ??
+                                      false;
+                              if (formValid) {
+                                controller.login(
+                                  _emailEC.text,
+                                  _passwordEC.text,
+                                );
+                              }
+                            },
+                            width: context.width,
                           ),
                         ),
                         SizedBox(height: _responsive.dp(4.6)),

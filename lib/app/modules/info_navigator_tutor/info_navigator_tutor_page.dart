@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:projetoapp/app/components/instapet_buttom.dart';
+import '../../components/instapet_textformfield_ready_only.dart';
 import '../../core/core.dart';
 import './info_navigator_tutor_controller.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
@@ -82,88 +82,85 @@ class _InfoNavigatorTutorPageState
           Expanded(
             child: ListView(
               children: [
-                ListTile(
-                  title: Text(
-                    'Nome',
-                    style: TextStyle(
-                      color: PaletaCores.principal,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                Padding(
+                  padding: EdgeInsets.all(
+                    _responsive.dp(3.6),
                   ),
-                  subtitle: Text(
-                    'Renato Alves Pereira',
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
+                  child: InstapetTextformfieldReadyOnly(
+                    readyOnly: false,
+                    controller: controller.nameEC,
+                    label: 'Nome',
                   ),
                 ),
-                Divider(),
-                ListTile(
-                  title: Text(
-                    'E-mail',
-                    style: TextStyle(
-                      color: PaletaCores.principal,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    right: _responsive.dp(3.6),
+                    left: _responsive.dp(3.6),
                   ),
-                  subtitle: Text(
-                    'renatorv@gmail.com',
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
+                  child: InstapetTextformfieldReadyOnly(
+                    readyOnly: false,
+                    controller: controller.emailEC,
+                    label: 'E-mail',
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    // bottom: _responsive.dp(1),
+                    right: _responsive.dp(3),
+                    left: _responsive.dp(3),
+                    top: _responsive.dp(3),
+                  ),
+                  child: Listener(
+                    onPointerUp: (_) => setState(() => isPressed = false),
+                    onPointerDown: (_) => setState(() => isPressed = true),
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 100),
+                      child: Container(
+                        height: _responsive.dp(8),
+                        width: _responsive.dp(45),
+                        child: Center(
+                            child: Text(
+                          'ATUALIZAR',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
+                        padding: EdgeInsets.only(
+                          right: _responsive.dp(1),
+                          left: _responsive.dp(1),
+                          bottom: _responsive.dp(1),
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: backGroundColor,
+                          boxShadow: isPressed
+                              ? []
+                              : [
+                                  BoxShadow(
+                                    color: PaletaCores.principalSecundaria,
+                                    offset: -distance,
+                                    blurRadius: blur,
+                                    inset: isPressed,
+                                  ),
+                                  BoxShadow(
+                                    color: PaletaCores.principalSecundaria,
+                                    offset: -distance,
+                                    blurRadius: blur,
+                                    inset: isPressed,
+                                  ),
+                                ],
+                        ),
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ),
-          Listener(
-            onPointerUp: (_) => setState(() => isPressed = false),
-            onPointerDown: (_) => setState(() => isPressed = true),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 100),
-              child: Container(
-                height: _responsive.dp(8),
-                width: _responsive.dp(45),
-                child: Center(
-                    child: Text(
-                  'CADASTRAR',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                )),
-                padding: EdgeInsets.only(
-                  right: _responsive.dp(1),
-                  left: _responsive.dp(1),
-                  bottom: _responsive.dp(1),
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: backGroundColor,
-                  boxShadow: isPressed
-                      ? []
-                      : [
-                          BoxShadow(
-                            color: PaletaCores.principalSecundaria,
-                            offset: -distance,
-                            blurRadius: blur,
-                            inset: isPressed,
-                          ),
-                          BoxShadow(
-                            color: PaletaCores.principalSecundaria,
-                            offset: -distance,
-                            blurRadius: blur,
-                            inset: isPressed,
-                          ),
-                        ],
-                ),
-              ),
-            ),
-          ),
-          Padding(padding: EdgeInsets.only(bottom: 30))
+
+          // Padding(padding: EdgeInsets.only(bottom: 30))
         ],
       ),
     );

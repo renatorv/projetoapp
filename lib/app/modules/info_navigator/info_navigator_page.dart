@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:projetoapp/app/components/instapet_textformfield_ready_only.dart';
-import '../../components/instapet_buttom.dart';
 import '../../core/core.dart';
 import './info_navigator_controller.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
@@ -126,10 +125,10 @@ class _InfoNavigatorPageState
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                    bottom: _responsive.dp(3),
-                    right: _responsive.dp(4.5),
-                    left: _responsive.dp(4.5),
-                    top: _responsive.dp(3),
+                    bottom: _responsive.dp(2),
+                    right: _responsive.dp(3),
+                    left: _responsive.dp(3),
+                    top: _responsive.dp(2),
                   ),
                   child: Listener(
                     onPointerUp: (_) => setState(() => isPressed = false),
@@ -141,7 +140,7 @@ class _InfoNavigatorPageState
                         width: _responsive.dp(45),
                         child: Center(
                             child: Text(
-                          'CADASTRAR',
+                          'ATUALIZAR',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,
@@ -177,21 +176,6 @@ class _InfoNavigatorPageState
                     ),
                   ),
                 ),
-                // Padding(
-                //   padding: EdgeInsets.only(
-                //     right: _responsive.dp(3.6),
-                //     left: _responsive.dp(3.6),
-                //     bottom: _responsive.dp(3.6),
-                //     top: _responsive.dp(3),
-                //   ),
-                //   child: Center(
-                //     child: InstapetButtom(
-                //       label: 'ATUALIZAR',
-                //       onPressed: () {},
-                //       width: context.width,
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ),

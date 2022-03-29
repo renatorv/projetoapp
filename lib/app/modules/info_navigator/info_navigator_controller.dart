@@ -21,7 +21,7 @@ class InfoNavigatorController extends GetxController {
 
     PhotoPetViewModel pet = PhotoPetViewModel.fromJson(objeto!);
 
-    if (pet.nome != null && pet.nome != "") {
+    if (pet.nome != "") {
       _nameEC.text = pet.nome;
       update();
     } else {
